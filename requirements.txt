@@ -1,0 +1,9 @@
+google-genai
+numpy
+streamlit
+pydantic
+tenacity
+python-dotenv
+datasets
+langdetect
+pytest
