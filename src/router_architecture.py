@@ -24,7 +24,7 @@ class SemanticLLMRouter:
     def __init__(self):
         api_key = os.getenv("GEMINI_API_KEY")
         self.client = genai.Client(api_key=api_key)
-        self.gemini_pro = "gemini-2.5-pro"
+        self.gemini_pro =  "gemini-3.1-pro-preview"
         self.gemini_flash = "gemini-2.5-flash"
         self.semantic_cache = {} # reduce costs and improve performance
         self.CACHE_MAX_SIZE = CACHE_MAX_SIZE
