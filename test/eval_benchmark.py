@@ -33,7 +33,7 @@ def run_full_benchmark():
     print(f"p95 Latency: {p95_latency:.4f}s (95% of requests were faster than this)")
     print(f"p99 Latency: {p99_latency:.4f}s (Tail latency / worst cases)")
     print(f"\n=== Benchmark Summary ({total_samples} samples) ===")
-    for route in ["gemini-2.5-flash", "gemini-2.5-pro", "Local Simulator"]:
+    for route in ["gemini-2.5-flash", "gemini-3.1-pro-preview", "Local Simulator"]:
         estimated_cost, sample_size = get_estimated_cost(route)
         if estimated_cost is not None:
             print(f"{route}: estimated avg cost ${estimated_cost:.6f} (from {sample_size} past queries)")
