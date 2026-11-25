@@ -9,7 +9,7 @@ def get_router():
 
 router = get_router()
 st.title("🤖 Semantic LLM Router")
-
+st.write(f"Debug - Pro Model: {router.gemini_pro}")
 user_input = st.text_input("Ask a question...")
 
 if user_input:
