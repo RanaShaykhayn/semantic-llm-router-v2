@@ -298,8 +298,8 @@ class SemanticLLMRouter:
         t4 = time.time()
         target_route=self.prepare_routing_engine(user_vector)
         routing_ms = (time.time() - t4) * 1000
-        rag_result = self._generate_with_rag(user_input)
-        if rag_result is not None:
+      # rag_result = self._generate_with_rag(user_input)
+        """if rag_result is not None:
             latency = (time.time() - start_time) * 1000
             self.update_cache(cleaned, user_vector, rag_result["response"], rag_result["cost"])
             self._log_success(
@@ -312,7 +312,7 @@ class SemanticLLMRouter:
                 money_saved=0.0,
                 latency_ms=latency
             )
-            return validated.model_dump()
+            return validated.model_dump()"""
         
         
         try:
