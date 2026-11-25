@@ -17,8 +17,9 @@ Sending every user query to a large, expensive model (like Gemini Pro) wastes mo
 - **Agent Loop**: The agent successfully uses tools and stops when it has enough information.
 - **Performance Analysis**: I discovered that Embedding takes 41% of total latency, not generation.
 
+## 🌐 Live Demo
+You can try the live application here: [Semantic LLM Router](https://semantic-llm-router-v2-kz6cjjbfdrdf4juir77tpp.streamlit.app/)
+
+-
+
 ## 🚀 How to Run It
-I've packaged this project with Docker. To run it:
-```bash
-docker build -t semantic-router .
-docker run -p 8501:8501 --env-file .env semantic-router
