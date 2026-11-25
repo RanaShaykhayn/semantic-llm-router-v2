@@ -8,7 +8,7 @@ import re
 from .schemas import RoutingResult
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 from .database import log_query, get_estimated_cost, get_estimated_latency
-from .retriever import SimpleRetriever
+#from .retriever import SimpleRetriever
 from .config import (
     REFERENCE_GREETINGS, REFERENCE_COMPLEX,
     CACHE_TTL_SECONDS, CACHE_MAX_SIZE,
@@ -33,9 +33,9 @@ class SemanticLLMRouter:
         self._complex_vectors = np.array([self.get_embedding(c) for c in self.reference_complex])
         self.reference_greetings = REFERENCE_GREETINGS
         self._greeting_vectors = np.array([self.get_embedding(g) for g in self.reference_greetings])
-        self.retriever=SimpleRetriever()
-        self.retriever.load_documents("documents")
-        self.retriever.build_vectors()
+       # self.retriever=SimpleRetriever()
+       # self.retriever.load_documents("documents")
+        #self.retriever.build_vectors()
 
     def preprocess_text(self, text: str | None) -> str:
 
