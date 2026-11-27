@@ -3,11 +3,9 @@ from pathlib import Path
 
 db_path=Path(__file__).parent.parent/"router_data.db"
 schema_path = Path(__file__).parent.parent / "data" / "schema.sql"
-# Initialize database: run once to create schema/tables
 def init_db():
     conn=sqlite3.connect(db_path)
     cursor=conn.cursor()
-    # Load database schema from an external configuration file
     with open(schema_path, mode='r', encoding="utf-8")as f:
         schema=f.read()
 
@@ -15,7 +13,6 @@ def init_db():
     conn.commit()
     conn.close()
     print("successful ac")
-# Log request metadata: document every system interaction
 def log_query(data: dict) -> None:
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
@@ -75,7 +72,6 @@ def log_evaluation_run(data: dict) -> None:
     ))
     conn.commit()
     conn.close()
-# Smart estimator: predict costs based on historical usage patterns
 def get_estimated_cost(route: str) -> tuple[float, int] | tuple[None, int]:
   
     conn = sqlite3.connect(db_path)
@@ -84,8 +80,8 @@ def get_estimated_cost(route: str) -> tuple[float, int] | tuple[None, int]:
         """
         SELECT AVG(real_cost), COUNT(*)
         FROM query_logs
-        WHERE predicted_route = ? AND real_cost IS NOT NULL
-        """,
+        WHERE predicted_route = ? AND latency_ms IS NOT NULL
+          AND created_at >= datetime('now', '-10 minutes')        """,
         (route,)
     )
     avg_cost, sample_size = cursor.fetchone()

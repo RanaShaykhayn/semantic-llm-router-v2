@@ -16,5 +16,6 @@ __pycache__/
 test/check_db.py        # ← أداة مؤقتة
 test/test_execute.py    # ← اختبار يدوي
 calibrate.py
+reports/
 # ===== VENV =====
 venv/
