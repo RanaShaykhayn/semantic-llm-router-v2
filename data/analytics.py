@@ -23,9 +23,9 @@ def get_route_metrics(db_path: str) -> list[dict[str, Any]]:
         COUNT(*) AS total_queries,
         ROUND(AVG(latency_ms), 2) AS avg_latency_ms,
         ROUND(
-            MAX(
+            MIN(
                 CASE
-                    WHEN rn >= CAST(0.95 * cnt AS INT) THEN latency_ms
+                    WHEN rn * 100 >= 95 * cnt THEN latency_ms
                 END
             ),
             2

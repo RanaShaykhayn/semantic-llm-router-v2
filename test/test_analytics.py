@@ -34,3 +34,25 @@ def test_get_route_metrics_with_dummy_db(tmp_path):
     assert metrics[0]["route"] == "gemini-2.5-flash"
     assert metrics[0]["total_queries"] == 2
     assert metrics[0]["cache_hit_rate_pct"] == 50.0
+
+
+def test_p95_latency(tmp_path):
+    db_file = str(tmp_path / "p95.db")
+    conn = sqlite3.connect(db_file)
+    conn.execute("""
+        CREATE TABLE query_logs (
+            predicted_route TEXT,
+            latency_ms REAL,
+            real_cost REAL,
+            was_cache_hit BOOLEAN
+        )
+    """)
+    conn.executemany(
+        "INSERT INTO query_logs VALUES (?, ?, ?, ?)",
+        [("gemini-2.5-flash", i, 0.0, 0) for i in range(1, 101)],
+    )
+    conn.commit()
+    conn.close()
+
+    metrics = get_route_metrics(db_file)
+    assert metrics[0]["p95_latency_ms"] == 95
